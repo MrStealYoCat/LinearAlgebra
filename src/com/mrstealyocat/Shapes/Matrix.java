@@ -75,5 +75,33 @@ public class Matrix {
 		return size;
 	}
 
+	public Matrix rightMultiplication(float[] vector) {
+		if (vector.length != this.size) {
+			throw new RuntimeException(String.format(
+							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
+							new IndexOutOfBoundsException());
+		}
+		float[][] array2D = new float[this.size][this.size];
+		for (int i=0;i<this.size;i++) {
+			for (int j=0; j<this.size;j++) {
+				array2D[i][j] *= vector[j];
+			}
+		}
+		return new Matrix(array2D);
+	}
 
+	public Matrix rightMultiplication(Matrix matrix) {
+		if (matrix.getSize() != this.size) {
+			throw new RuntimeException(String.format(
+							"Invalid matrix size! Matrix must be %dx%d. Take a Linear Algebra class already.", size, size),
+							new IndexOutOfBoundsException());
+		}
+		float[][] array2D = new float[this.size][this.size];
+		for (int i=0;i<this.size;i++) {
+			for (int j=0; j<this.size;j++) {
+				array2D[i][j] *= matrix.getMatrixArray()[i][j];
+			}
+		}
+		return new Matrix(array2D);
+	}
 }
