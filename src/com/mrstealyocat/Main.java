@@ -16,7 +16,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Player player = new Player();
-		Window window = new Window("My display.Window", 1500, 1000, player);
+		Window window = new Window("My display.Window", 1000, 1000, player);
 		loop(window, player);
 		cleanup(window);
 	}
@@ -49,6 +49,7 @@ public class Main {
 			//TODO change to an object that only re-calculates opengl walls when you move
 			//Frame.drawWalls(player);
 			//Graphics.draw(player.getPosX(), player.getPosY());
+			Graphics.drawGraph();
 			Graphics.drawMatrix(player.getCoord());
 
 			//player.keyPressed();
