@@ -75,7 +75,7 @@ public class Matrix {
 		return size;
 	}
 
-	public Matrix rightMultiplication(float[] vector) {
+	public Matrix Multiplication(float[] vector) {
 		if (vector.length != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
@@ -90,7 +90,7 @@ public class Matrix {
 		return new Matrix(array2D);
 	}
 
-	public Matrix rightMultiplication(Matrix matrix) {
+	public Matrix Multiplication(Matrix matrix) {
 		if (matrix.getSize() != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid matrix size! Matrix must be %dx%d. Take a Linear Algebra class already.", size, size),
