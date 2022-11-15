@@ -81,7 +81,7 @@ public class Matrix {
 							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
 							new IndexOutOfBoundsException());
 		}
-		float[][] array2D = new float[this.size][this.size];
+		float[][] array2D = matrixArray;
 		for (int i=0;i<this.size;i++) {
 			for (int j=0; j<this.size;j++) {
 				array2D[i][j] *= vector[j];

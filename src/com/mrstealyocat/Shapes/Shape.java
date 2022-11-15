@@ -12,12 +12,6 @@ public class Shape {
 	private double vectorY;
 	private int rotation = -90;
 	private Matrix coordinate;
-	private int counter;
-
-	Matrix[] coordinates = {
-					new Matrix(new float[]{0.1f, 0.3f, -0.2f, 0.1f }),
-					new Matrix(new float[]{0.1f, 0.3f, 0.4f, 0.7f })
-	};
 
 	public Shape() {
 		this.coordinate = new Matrix(new float[]{0.1f, 0.3f, -0.2f, 0.1f});
@@ -36,12 +30,7 @@ public class Shape {
 		this.coordinate = coord;
 	}
 	public void transform() {
-		flip();
-		setCoord(coordinates[counter]);
-	}
-	
-	private void flip() {
-		counter = ++counter % coordinate.getSize();
+		setCoord(coordinate.Multiplication(new float[]{-1f,-1f}));
 	}
 
 
