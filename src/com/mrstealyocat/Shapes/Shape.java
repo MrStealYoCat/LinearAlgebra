@@ -1,21 +1,16 @@
-package com.mrstealyocat.sprites;
-
-import com.mrstealyocat.controlListeners.KeyListener;
-
-import java.util.Map;
+package com.mrstealyocat.Shapes;
 
 import static com.mrstealyocat.controlListeners.KeyListener.*;
 import static com.mrstealyocat.controlListeners.MouseListener.*;
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Player {
+public class Shape {
 
 	private double posX;
 	private double posY;
 	private double vectorX;
 	private double vectorY;
 	private int rotation = -90;
-	private double size;
 	private float[][] coord;
 	private int counter;
 
@@ -27,12 +22,11 @@ public class Player {
 		this.coord = coord;
 	}
 
-	public Player() {
-		float[][] coord = {
+	public Shape() {
+		this.coord = new float[][]{
 						{0.1f, 0.3f},
 						{-0.2f, 0.1f}
 		};
-		this.coord = coord;
 	}
 
 
@@ -86,12 +80,6 @@ public class Player {
 	public void rotate() {
 
 	}
-	public void shoot() {
-
-	}
-	public void explode() {
-
-	}
 	public double getPosX() {
 		return posX;
 	}
@@ -102,9 +90,5 @@ public class Player {
 
 	public int getRotation() {
 		return rotation;
-	}
-
-	public double getSize() {
-		return size;
 	}
 }

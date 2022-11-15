@@ -1,8 +1,9 @@
 package com.mrstealyocat;
 
+import com.mrstealyocat.controlListeners.KeyListener;
 import com.mrstealyocat.display.Graphics;
 import com.mrstealyocat.display.Window;
-import com.mrstealyocat.sprites.Player;
+import com.mrstealyocat.Shapes.Shape;
 import org.lwjgl.opengl.GL;
 
 import java.util.Objects;
@@ -15,14 +16,15 @@ import static org.lwjgl.opengl.GL11.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Player player = new Player();
-		Window window = new Window("My display.Window", 1000, 1000, player);
-		loop(window, player);
+		Shape shape = new Shape();
+		KeyListener.setPlayer(shape);
+		Window window = new Window("My display.Window", 1000, 1000);
+		loop(window, shape);
 		cleanup(window);
 	}
 
 	/* Game Loop Function */
-	public static void loop(Window window, Player player) {
+	public static void loop(Window window, Shape shape) {
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
@@ -46,20 +48,11 @@ public class Main {
 			// invoked during this call.
 			glfwPollEvents();
 
-			//TODO change to an object that only re-calculates opengl walls when you move
-			//Frame.drawWalls(player);
-			//Graphics.draw(player.getPosX(), player.getPosY());
 			Graphics.drawGraph();
-			Graphics.drawMatrix(player.getCoord());
+			Graphics.drawMatrix(shape.getCoord());
 
-			//player.keyPressed();
-			//player.nextTransform();
-			//player.rotate();
-			//player.move(0,player.getRotation());
 			endMouseFrame();
-
 			glFlush(); // render now
-
 			glfwSwapBuffers(window.getWindowHandle()); // swap the color buffers
 		}
 	}

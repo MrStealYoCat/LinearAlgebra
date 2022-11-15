@@ -2,7 +2,6 @@ package com.mrstealyocat.display;
 
 import com.mrstealyocat.controlListeners.KeyListener;
 import com.mrstealyocat.controlListeners.MouseListener;
-import com.mrstealyocat.sprites.Player;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
@@ -18,16 +17,14 @@ public class Window {
 	private final String title;
 	private final int width;
 	private final int height;
-	private final Player player;
 
 	// What LWJGL uses to keep track of the window
 	private long windowHandle;
 
-	public Window(String title, int width, int height, Player player) {
+	public Window(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
 		this.height = height;
-		this.player = player;
 
 		init();
 	}
@@ -52,7 +49,6 @@ public class Window {
 			throw new RuntimeException("Failed to create the GLFW window");
 
 		// Setup callbacks
-		KeyListener.setPlayer(player);
 		glfwSetCursorPosCallback(windowHandle, MouseListener::mousePosCallback);
 		glfwSetMouseButtonCallback(windowHandle, MouseListener::mouseButtonCallback);
 		glfwSetScrollCallback(windowHandle, MouseListener::mouseScrollCallback);
