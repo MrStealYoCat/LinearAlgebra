@@ -74,4 +74,6 @@ public class Matrix {
 	public int getSize() {
 		return size;
 	}
+
+
 }
