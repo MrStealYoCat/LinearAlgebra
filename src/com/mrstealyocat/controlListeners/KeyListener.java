@@ -23,7 +23,7 @@ public class KeyListener {
 		if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 			glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-			shape.nextTransform();
+			shape.transform();
 		}
 		if (action == GLFW_PRESS) {
 			get().keyPressed[key] = true;

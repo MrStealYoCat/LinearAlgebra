@@ -40,7 +40,7 @@ public class Graphics {
 		}
 	}
 
-	public static void drawMatrix(float[][] coord) {
+	public static void drawMatrixArray(float[][] coord) {
 		glLineWidth(10.0f);
 		glBegin(GL_LINES);
 		glColor3f((float)1.0,(float)0.0,(float)0.0);

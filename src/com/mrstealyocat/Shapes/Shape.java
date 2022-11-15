@@ -11,25 +11,44 @@ public class Shape {
 	private double vectorX;
 	private double vectorY;
 	private int rotation = -90;
-	private float[][] coord;
+	private Matrix coordinate;
 	private int counter;
 
-	public float[][] getCoord() {
-		return coord;
-	}
-
-	public void setCoord(float[][] coord) {
-		this.coord = coord;
-	}
+	Matrix[] coordinates = {
+					new Matrix(new float[]{0.1f, 0.3f, -0.2f, 0.1f }),
+					new Matrix(new float[]{0.1f, 0.3f, 0.4f, 0.7f })
+	};
 
 	public Shape() {
-		this.coord = new float[][]{
-						{0.1f, 0.3f},
-						{-0.2f, 0.1f}
-		};
+		this.coordinate = new Matrix(new float[]{0.1f, 0.3f, -0.2f, 0.1f});
+	}
+
+	public Matrix getCoordinate() {
+		return coordinate;
+	}
+	public void setCoordinate(float[] coordinate) {
+		this.coordinate.setMatrixArray(coordinate);
+	}
+	public void setCoord(float[][] coord) {
+		this.coordinate.setMatrixArray(coord);
+	}
+	public void setCoord(Matrix coord) {
+		this.coordinate = coord;
+	}
+	public void transform() {
+		flip();
+		setCoord(coordinates[counter]);
+	}
+	
+	private void flip() {
+		counter = ++counter % coordinate.getSize();
 	}
 
 
+
+
+
+	//Leftover code from game stuff may need it in the future.
 	/* Checks normal game keys for movement */
 	public void keyPressed() {
 		rotation = (rotation + (int)(getDX()/2)) % 360;
@@ -45,13 +64,6 @@ public class Shape {
 		if (isKeyPressed(GLFW_KEY_UP) || isKeyPressed(GLFW_KEY_W)) {
 			move(1,rotation+180);
 		}
-	}
-	public void nextTransform() {
-		float[][][] coord = {
-						{{0.1f, 0.3f}, {-0.2f, 0.1f}},
-						{{0.1f, 0.3f}, {0.4f, 0.7f}}
-		};
-		setCoord(coord[++counter % coord.length]);
 	}
 	public void move(int velocity, int rotation) {
 		System.out.printf("%f, %f\n", vectorX, vectorY);
@@ -83,11 +95,9 @@ public class Shape {
 	public double getPosX() {
 		return posX;
 	}
-
 	public double getPosY() {
 		return posY;
 	}
-
 	public int getRotation() {
 		return rotation;
 	}

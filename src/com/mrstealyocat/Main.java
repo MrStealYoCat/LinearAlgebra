@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) {
 		Shape shape = new Shape();
 		KeyListener.setPlayer(shape);
-		Window window = new Window("My display.Window", 1000, 1000);
+		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
 		loop(window, shape);
 		cleanup(window);
 	}
@@ -48,8 +48,9 @@ public class Main {
 			// invoked during this call.
 			glfwPollEvents();
 
+			//Do Stuff Here
 			Graphics.drawGraph();
-			Graphics.drawMatrix(shape.getCoord());
+			Graphics.drawMatrixArray(shape.getCoordinate().getMatrixArray());
 
 			endMouseFrame();
 			glFlush(); // render now
