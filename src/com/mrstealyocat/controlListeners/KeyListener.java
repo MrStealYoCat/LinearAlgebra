@@ -25,6 +25,9 @@ public class KeyListener {
 		if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
 			shape.transform();
 		}
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+			shape.rotate(90);
+		}
 		if (action == GLFW_PRESS) {
 			get().keyPressed[key] = true;
 		} else if (action == GLFW_RELEASE) {

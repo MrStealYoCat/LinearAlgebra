@@ -75,7 +75,7 @@ public class Matrix {
 		return size;
 	}
 
-	public Matrix Multiplication(float[] vector) {
+	public Matrix MultiplicationBy(float[] vector) {
 		if (vector.length != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
@@ -90,16 +90,22 @@ public class Matrix {
 		return new Matrix(array2D);
 	}
 
-	public Matrix Multiplication(Matrix matrix) {
+	public Matrix MultiplicationBy(Matrix matrix) {
 		if (matrix.getSize() != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid matrix size! Matrix must be %dx%d. Take a Linear Algebra class already.", size, size),
 							new IndexOutOfBoundsException());
 		}
-		float[][] array2D = new float[this.size][this.size];
+
+		float[][] array2D = new float[size][size];
+
 		for (int i=0;i<this.size;i++) {
 			for (int j=0; j<this.size;j++) {
-				array2D[i][j] *= matrix.getMatrixArray()[i][j];
+				float placeholder = 0f;
+				for (int k=0; k<this.size;k++) {
+					placeholder += matrixArray[i][k] * matrix.getMatrixArray()[k][j];
+				}
+				array2D[i][j] = placeholder;
 			}
 		}
 		return new Matrix(array2D);

@@ -44,8 +44,8 @@ public class Graphics {
 		glLineWidth(10.0f);
 		glBegin(GL_LINES);
 		glColor3f((float)1.0,(float)0.0,(float)0.0);
-		glVertex2f(coord[0][0],coord[0][1]);
-		glVertex2f(coord[1][0],coord[1][1]);
+		glVertex2f(coord[0][0],coord[1][0]);
+		glVertex2f(coord[0][1],coord[1][1]);
 		glEnd();
 	}
 
