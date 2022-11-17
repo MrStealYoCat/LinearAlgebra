@@ -1,6 +1,9 @@
 package com.mrstealyocat.Shapes;
 
-import static java.lang.Math.sqrt;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import static java.lang.Math.*;
 
 public class Matrix {
 	private float[][] matrixArray;
@@ -75,7 +78,7 @@ public class Matrix {
 		return size;
 	}
 
-	public Matrix MultiplicationBy(float[] vector) {
+	public Matrix multiplicationBy(float[] vector) {
 		if (vector.length != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
@@ -90,7 +93,7 @@ public class Matrix {
 		return new Matrix(array2D);
 	}
 
-	public Matrix MultiplicationBy(Matrix matrix) {
+	public Matrix multiplicationBy(Matrix matrix) {
 		if (matrix.getSize() != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid matrix size! Matrix must be %dx%d. Take a Linear Algebra class already.", size, size),
@@ -110,4 +113,58 @@ public class Matrix {
 		}
 		return new Matrix(array2D);
 	}
+
+	public Matrix translateToOrigin() {
+		float[][] translationMatrix = matrixArray;
+		translationMatrix[0][2] *= -1;
+		translationMatrix[1][2] *= -1;
+		return this.multiplicationBy(new Matrix(translationMatrix));
+	}
+	public Matrix scaleMatrix(float scaleX, float scaleY) {
+		Matrix scalarMatrix = new Matrix(new float[]{
+						scaleX, 0f,     0f,
+						0f,     scaleY, 0f,
+						0f,     0f,     1f });
+		return this.multiplicationBy(scalarMatrix);
+	}
+	public Matrix rotateMatrix(double degrees) {
+		float pi180 = (float)(PI/180);
+		float[] rotation = new float[]{
+						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
+						(float) sin(degrees*pi180), (float) cos(degrees*pi180),      0f,
+						0f,                         0f,                              1f };
+		for (float num:rotation) {
+			num = round(num, 2);
+		}
+		Matrix rotationMatrix = new Matrix(rotation);
+		return rotationMatrix.multiplicationBy(this);
+	}
+	public static float round(float d, int decimalPlace) {
+		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();
+	}
+
+	public float getX() {
+		return matrixArray[0][2];
+	}
+	public float getY() {
+		return matrixArray[1][2];
+	}
+
+	/*
+	* Scale Matrix
+	*    | ScaleX   0        0 |
+	*    | 0        ScaleY   0 |
+	*    | 0        0        1 |
+	*
+	* Translate To Origin Matrix
+	*    | 1        0       -X |
+	*    | 0        1       -Y |
+	*    | 0        0        1 |
+	*
+	* Translate Back From Origin Matrix
+	*    | 1        0       +X |
+	*    | 0        1       +Y |
+	*    | 0        0        1 |
+	*
+	* */
 }

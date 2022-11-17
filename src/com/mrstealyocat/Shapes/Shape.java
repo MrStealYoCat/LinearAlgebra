@@ -8,17 +8,25 @@ import static java.lang.Math.*;
 public class Shape {
 
 	private Matrix coordinate;
+	private Matrix[] vertices;
 
 	public Shape() {
-		this.coordinate = new Matrix(new float[]{
-						0.0f, 0.2f, 0f,
-						0.0f, 0.1f, 0f,
-						0f, 0f, 1f});
+		float[] fa1 = new float[]{
+						1f, 0f, 0.2f,
+						0f, 1f, 0.1f,
+						0f, 0f, 1f };
+		float[] fa2 = new float[]{
+						1f, 0f, 0.0f,
+						0f, 1f, 0.0f,
+						0f, 0f, 1f };
+		this.coordinate = new Matrix(fa1);
+		this.vertices = new Matrix[]{ new Matrix(fa1), new Matrix(fa2) };
 	}
 
-	public Matrix getCoordinate() {
-		return coordinate;
+	public Matrix[] getVertices() {
+		return vertices;
 	}
+
 	public void setCoordinate(float[] coordinate) {
 		this.coordinate.setMatrixArray(coordinate);
 	}
@@ -29,30 +37,30 @@ public class Shape {
 		this.coordinate = coord;
 	}
 	public void transform() {
-		setCoord(coordinate.MultiplicationBy(new float[]{-1f,-1f, 1f}));
+		float[] fa = new float[]{1, 1, -1};
+		transform(fa);
 	}
+	public void transform(float[] fa) {
+		for (Matrix vector:vertices) {
+			vector = vector.multiplicationBy(fa);
+		}
+	}
+	public void transform(Matrix matrix) {
+		//setCoord(coordinate.multiplicationBy(new float[]{-1f,-1f, 1f}));
+		for (Matrix vector:vertices) {
+			vector.multiplicationBy(matrix);
+		}
+	}
+
 	public void transform(float degrees) {
 		rotate(degrees);
 	}
 	public void rotate(float degrees) {
-		float pi180 = (float)(PI/180);
-		float[] rotation = new float[]{
-						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
-						(float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f,
-						0f, 0f, 1f};
-		for (int i=0; i<rotation.length; i++) {
-			rotation[i] = round(rotation[i], 2);
-		}
-		Matrix rotationMatrix = new Matrix(rotation);
-		System.out.println(coordinate);
-		System.out.println(rotationMatrix);
-		System.out.println(rotationMatrix.MultiplicationBy(coordinate));
-		coordinate = rotationMatrix.MultiplicationBy(coordinate);
-
+		coordinate = coordinate.rotateMatrix(degrees);
 	}
-
-	public static float round(float d, int decimalPlace)
-	{
-		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();
+	public void rotate() {
+		for (Matrix vector:vertices) {
+			vector.rotateMatrix(10);
+		}
 	}
 }

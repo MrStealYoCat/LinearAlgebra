@@ -50,7 +50,7 @@ public class Main {
 
 			//Do Stuff Here
 			Graphics.drawGraph();
-			Graphics.drawMatrixArray(shape.getCoordinate().getMatrixArray());
+			Graphics.drawMatrixArray(shape.getVertices());
 
 			endMouseFrame();
 			glFlush(); // render now

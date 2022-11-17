@@ -1,5 +1,7 @@
 package com.mrstealyocat.display;
 
+import com.mrstealyocat.Shapes.Matrix;
+
 import static org.lwjgl.opengl.GL11.*;
 
 
@@ -40,12 +42,15 @@ public class Graphics {
 		}
 	}
 
-	public static void drawMatrixArray(float[][] coord) {
+	public static void drawMatrixArray(Matrix[] vertices) {
 		glLineWidth(10.0f);
 		glBegin(GL_LINES);
 		glColor3f((float)1.0,(float)0.0,(float)0.0);
-		glVertex2f(coord[0][0],coord[1][0]);
-		glVertex2f(coord[0][1],coord[1][1]);
+		for (Matrix vertex:vertices) {
+			glVertex2f(vertex.getX(), vertex.getY());
+		}
+		//glVertex2f(matrix1.getX(), matrix1.getY());
+		//glVertex2f(matrix2.getX(), matrix2.getY());
 		glEnd();
 	}
 
