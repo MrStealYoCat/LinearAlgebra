@@ -7,7 +7,6 @@ import static java.lang.Math.*;
 
 public class Shape {
 
-	private Matrix coordinate;
 	private Matrix[] vertices;
 
 	public Shape() {
@@ -19,7 +18,7 @@ public class Shape {
 						1f, 0f, 0.0f,
 						0f, 1f, 0.0f,
 						0f, 0f, 1f };
-		this.coordinate = new Matrix(fa1);
+		//this.coordinate = new Matrix(fa1);
 		this.vertices = new Matrix[]{ new Matrix(fa1), new Matrix(fa2) };
 	}
 
@@ -27,40 +26,27 @@ public class Shape {
 		return vertices;
 	}
 
-	public void setCoordinate(float[] coordinate) {
-		this.coordinate.setMatrixArray(coordinate);
-	}
-	public void setCoord(float[][] coord) {
-		this.coordinate.setMatrixArray(coord);
-	}
-	public void setCoord(Matrix coord) {
-		this.coordinate = coord;
-	}
 	public void transform() {
 		float[] fa = new float[]{1, 1, -1};
 		transform(fa);
 	}
 	public void transform(float[] fa) {
-		for (Matrix vector:vertices) {
-			vector = vector.multiplicationBy(fa);
+		for (int i=0; i<vertices.length;i++) {
+			vertices[i] = vertices[i].multiplicationBy(fa);
 		}
 	}
 	public void transform(Matrix matrix) {
 		//setCoord(coordinate.multiplicationBy(new float[]{-1f,-1f, 1f}));
 		for (Matrix vector:vertices) {
-			vector.multiplicationBy(matrix);
+			vector.multiplicationBy(matrix).getMatrixArray();
 		}
-	}
-
-	public void transform(float degrees) {
-		rotate(degrees);
 	}
 	public void rotate(float degrees) {
-		coordinate = coordinate.rotateMatrix(degrees);
+		for (int i=0; i<vertices.length;i++) {
+			vertices[i] = vertices[i].rotateMatrix(degrees);
+		}
 	}
 	public void rotate() {
-		for (Matrix vector:vertices) {
-			vector.rotateMatrix(10);
-		}
+		rotate(10);
 	}
 }

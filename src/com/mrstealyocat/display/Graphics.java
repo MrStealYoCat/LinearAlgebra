@@ -1,6 +1,7 @@
 package com.mrstealyocat.display;
 
 import com.mrstealyocat.Shapes.Matrix;
+import com.mrstealyocat.Shapes.Shape;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -49,8 +50,6 @@ public class Graphics {
 		for (Matrix vertex:vertices) {
 			glVertex2f(vertex.getX(), vertex.getY());
 		}
-		//glVertex2f(matrix1.getX(), matrix1.getY());
-		//glVertex2f(matrix2.getX(), matrix2.getY());
 		glEnd();
 	}
 

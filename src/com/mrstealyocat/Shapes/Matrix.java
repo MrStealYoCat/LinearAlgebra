@@ -84,9 +84,10 @@ public class Matrix {
 							"Invalid vector size! Vector must be %dx1. Take a Linear Algebra class already.", this.size),
 							new IndexOutOfBoundsException());
 		}
-		float[][] array2D = matrixArray;
+		float[][] array2D = new float[size][size];
 		for (int i=0;i<this.size;i++) {
 			for (int j=0; j<this.size;j++) {
+				array2D[i][j] = matrixArray[i][j];
 				array2D[i][j] *= vector[j];
 			}
 		}
@@ -130,14 +131,11 @@ public class Matrix {
 	public Matrix rotateMatrix(double degrees) {
 		float pi180 = (float)(PI/180);
 		float[] rotation = new float[]{
-						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
-						(float) sin(degrees*pi180), (float) cos(degrees*pi180),      0f,
-						0f,                         0f,                              1f };
-		for (float num:rotation) {
-			num = round(num, 2);
-		}
-		Matrix rotationMatrix = new Matrix(rotation);
-		return rotationMatrix.multiplicationBy(this);
+						round((float) cos(degrees*pi180),2), round((float) (-1*sin(degrees*pi180)),2), 0f,
+						round((float) sin(degrees*pi180),2), round((float) cos(degrees*pi180),2),      0f,
+						0f,                         										 0f,                              										 1f };
+
+		return new Matrix(rotation).multiplicationBy(this);
 	}
 	public static float round(float d, int decimalPlace) {
 		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();
