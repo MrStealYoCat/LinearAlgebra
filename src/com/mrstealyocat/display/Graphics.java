@@ -44,11 +44,15 @@ public class Graphics {
 	}
 
 	public static void drawMatrixArray(Matrix[] vertices) {
-		glLineWidth(10.0f);
+		glLineWidth(8.0f);
 		glBegin(GL_LINES);
 		glColor3f((float)1.0,(float)0.0,(float)0.0);
-		for (Matrix vertex:vertices) {
-			glVertex2f(vertex.getX(), vertex.getY());
+//		for (Matrix vertex:vertices) {
+//			glVertex2f(vertex.getX(), vertex.getY());
+//		}
+		for (int i=0; i<vertices.length-1; i++) {
+			glVertex2f(vertices[i].getX(), vertices[i].getY());
+			glVertex2f(vertices[i+1].getX(), vertices[i+1].getY());
 		}
 		glEnd();
 	}

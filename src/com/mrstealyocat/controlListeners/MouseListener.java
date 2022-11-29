@@ -1,5 +1,7 @@
 package com.mrstealyocat.controlListeners;
 
+import com.mrstealyocat.Shapes.Shape;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class MouseListener {
@@ -12,9 +14,13 @@ public class MouseListener {
 	private double lastY;
 	private final boolean[] mouseButtonPressed = new boolean[GLFW_MOUSE_BUTTON_LAST+1];
 	private boolean isDragging;
+	private static Shape shape;
 
 	private MouseListener() {
 
+	}
+	public static void setPlayer(Shape shape) {
+		MouseListener.shape = shape;
 	}
 
 	public static MouseListener get() {
@@ -29,6 +35,10 @@ public class MouseListener {
 		get().lastY = get().yPos;
 		get().xPos = xPos;
 		get().yPos = yPos;
+		if (MouseListener.getDX() != 0) {
+			shape.rotate(getDX()/2);
+			//System.out.println(getDX()/2);
+		}
 		get().isDragging = isPressed();
 	}
 

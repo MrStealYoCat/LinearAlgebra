@@ -9,6 +9,18 @@ public class Matrix {
 	private float[][] matrixArray;
 	private final int size;
 
+	public Matrix() {
+		this.matrixArray = new float[][] {{1,0,0},{0,1,0},{0,0,1}};
+		this.size = 3;
+	}
+	public Matrix(float x, float y) {
+		float[] fa = new float[]{
+						1f, 0f, x,
+						0f, 1f, y,
+						0f, 0f, 1f };
+		this.size = 3;
+		this.matrixArray = convertToSquareArray(fa);
+	}
 	public Matrix(float[] matrixArray) {
 		if (matrixArray.length == 4 || matrixArray.length == 9 || matrixArray.length == 16) {
 			this.size = (int)sqrt(matrixArray.length);
@@ -130,12 +142,12 @@ public class Matrix {
 	}
 	public Matrix rotateMatrix(double degrees) {
 		float pi180 = (float)(PI/180);
-		float[] rotation = new float[]{
-						round((float) cos(degrees*pi180),2), round((float) (-1*sin(degrees*pi180)),2), 0f,
-						round((float) sin(degrees*pi180),2), round((float) cos(degrees*pi180),2),      0f,
-						0f,                         										 0f,                              										 1f };
 
-		return new Matrix(rotation).multiplicationBy(this);
+		float[] rotation1 = new float[]{
+						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
+						(float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f,
+						0f, 0f, 1f};
+		return new Matrix(rotation1).multiplicationBy(this);
 	}
 	public static float round(float d, int decimalPlace) {
 		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();

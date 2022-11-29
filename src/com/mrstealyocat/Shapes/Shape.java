@@ -1,5 +1,7 @@
 package com.mrstealyocat.Shapes;
 
+import com.mrstealyocat.controlListeners.MouseListener;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -8,18 +10,21 @@ import static java.lang.Math.*;
 public class Shape {
 
 	private Matrix[] vertices;
+	//private Matrix transformationMatrix;
 
 	public Shape() {
-		float[] fa1 = new float[]{
-						1f, 0f, 0.2f,
-						0f, 1f, 0.1f,
-						0f, 0f, 1f };
-		float[] fa2 = new float[]{
-						1f, 0f, 0.0f,
-						0f, 1f, 0.0f,
-						0f, 0f, 1f };
-		//this.coordinate = new Matrix(fa1);
-		this.vertices = new Matrix[]{ new Matrix(fa1), new Matrix(fa2) };
+		this.vertices = new Matrix[]{
+//						new Matrix(0.2f, 0.1f),
+//						new Matrix(0.1f, 0.4f),
+//						new Matrix(0.3f, 0.7f)
+							new Matrix(-0.3f, 0.1f),
+							new Matrix(-0.3f, -0.3f),
+							new Matrix(0.3f, -0.3f),
+							new Matrix(0.3f, 0.1f),
+							new Matrix(-0.3f, 0.1f),
+							new Matrix(0f, 0.4f),
+							new Matrix(0.3f, 0.1f)
+		};
 	}
 
 	public Matrix[] getVertices() {
@@ -30,10 +35,11 @@ public class Shape {
 		float[] fa = new float[]{1, 1, -1};
 		transform(fa);
 	}
-	public void transform(float[] fa) {
+	public void transform(float[] floatArray) {
 		for (int i=0; i<vertices.length;i++) {
-			vertices[i] = vertices[i].multiplicationBy(fa);
+			vertices[i] = vertices[i].multiplicationBy(floatArray);
 		}
+		//transformationMatrix.
 	}
 	public void transform(Matrix matrix) {
 		//setCoord(coordinate.multiplicationBy(new float[]{-1f,-1f, 1f}));

@@ -1,6 +1,7 @@
 package com.mrstealyocat;
 
 import com.mrstealyocat.controlListeners.KeyListener;
+import com.mrstealyocat.controlListeners.MouseListener;
 import com.mrstealyocat.display.Graphics;
 import com.mrstealyocat.display.Window;
 import com.mrstealyocat.Shapes.Shape;
@@ -18,6 +19,7 @@ public class Main {
 	public static void main(String[] args) {
 		Shape shape = new Shape();
 		KeyListener.setPlayer(shape);
+		MouseListener.setPlayer(shape);
 		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
 		loop(window, shape);
 		cleanup(window);
