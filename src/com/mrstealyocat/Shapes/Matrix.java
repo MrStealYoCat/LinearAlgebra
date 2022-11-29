@@ -153,12 +153,25 @@ public class Matrix {
 	public Matrix rotateMatrix(double degrees) {
 		float pi180 = (float)(PI/180);
 
-		float[] rotation1 = new float[]{
+		Matrix rotationX = new Matrix(new float[]{
+						1f, 0f, 0f, 0f,
+						0f, (float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
+						0f, (float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f,
+						0f, 0f, 0f, 1f});
+		Matrix rotationY = new Matrix(new float[]{
+						(float) cos(degrees*pi180), 0f, (float) sin(degrees*pi180), 0f,
+						0f, 1f, 0f, 0f,
+						(float) (-1*sin(degrees*pi180)), 0f, (float) cos(degrees*pi180), 0f,
+						0f, 0f, 0f, 1f});
+		Matrix rotationZ = new Matrix(new float[]{
 						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f, 0f,
 						(float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f, 0f,
 						0f, 0f, 1f, 0f,
-						0f, 0f, 0f, 1f};
-		return new Matrix(rotation1).multiplicationBy(this);
+						0f, 0f, 0f, 1f});
+		return rotationZ.multiplicationBy(rotationY.multiplicationBy(rotationX.multiplicationBy(this)));
+
+
+		//return new Matrix(rotation1).multiplicationBy(this);
 	}
 	public static float round(float d, int decimalPlace) {
 		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();
