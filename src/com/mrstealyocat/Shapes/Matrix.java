@@ -199,22 +199,4 @@ public class Matrix {
 	public void setZ(float z) {
 		matrixArray[2][3] = z;
 	}
-
-	/*
-	* Scale Matrix
-	*    | ScaleX   0        0 |
-	*    | 0        ScaleY   0 |
-	*    | 0        0        1 |
-	*
-	* Translate To Origin Matrix
-	*    | 1        0       -X |
-	*    | 0        1       -Y |
-	*    | 0        0        1 |
-	*
-	* Translate Back From Origin Matrix
-	*    | 1        0       +X |
-	*    | 0        1       +Y |
-	*    | 0        0        1 |
-	*
-	* */
 }
