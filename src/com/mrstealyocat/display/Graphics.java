@@ -51,8 +51,10 @@ public class Graphics {
 //			glVertex2f(vertex.getX(), vertex.getY());
 //		}
 		for (int i=0; i<vertices.length-1; i++) {
-			glVertex2f(vertices[i].getX(), vertices[i].getY());
-			glVertex2f(vertices[i+1].getX(), vertices[i+1].getY());
+			//glVertex2f(vertices[i].getX(), vertices[i].getY());
+			//glVertex2f(vertices[i+1].getX(), vertices[i+1].getY());
+			glVertex3f(vertices[i].getX(), vertices[i].getY(), vertices[i].getZ());
+			glVertex3f(vertices[i+1].getX(), vertices[i+1].getY(), vertices[i+1].getZ());
 		}
 		glEnd();
 	}

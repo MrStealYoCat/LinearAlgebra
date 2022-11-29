@@ -23,10 +23,10 @@ public class KeyListener {
 		if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 			glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		if (key == GLFW_KEY_EQUAL && action == GLFW_PRESS) {
-			shape.transform(new float[]{1f,1f,1.1f});
+			shape.transform(new float[]{1f,1f,1f,1.1f});
 		}
 		if (key == GLFW_KEY_MINUS && action == GLFW_PRESS) {
-			shape.transform(new float[]{1f,1f,0.9f});
+			shape.transform(new float[]{1f,1f,1f,0.9f});
 		}
 		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 			shape.rotate();
@@ -38,16 +38,16 @@ public class KeyListener {
 		}
 
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A) {
-			shape.move(-0.1f, 0f);
+			shape.move(-0.1f, 0f, 0f);
 		}
 		if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) {
-			shape.move(0.1f, 0f);
+			shape.move(0.1f, 0f, 0f);
 		}
 		if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S) {
-			shape.move(0f, -0.1f);
+			shape.move(0f, -0.1f, 0f);
 		}
 		if (key == GLFW_KEY_UP || key == GLFW_KEY_W) {
-			shape.move(0f, 0.1f);
+			shape.move(0f, 0.1f, 0f);
 		}
 	}
 

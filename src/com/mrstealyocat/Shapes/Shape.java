@@ -10,18 +10,9 @@ public class Shape {
 	private Matrix[] vertices;
 	float posX = 0f;
 	float posY = 0f;
-	//private Matrix transformationMatrix;
+	float posZ = 0f;
 
 	public Shape() {
-//		this.vertices = new Matrix[]{
-//							new Matrix(-0.3f, 0.1f),
-//							new Matrix(-0.3f, -0.3f),
-//							new Matrix(0.3f, -0.3f),
-//							new Matrix(0.3f, 0.1f),
-//							new Matrix(-0.3f, 0.1f),
-//							new Matrix(0f, 0.4f),
-//							new Matrix(0.3f, 0.1f)
-//		};
 		this.vertices = fileInput("src/com/mrstealyocat/Shapes/vertices.txt");
 	}
 
@@ -31,7 +22,11 @@ public class Shape {
 		String[] parts;
 		while (!TextIO.eof()) {
 			parts = TextIO.getln().split(" ");
-			verts.add(new float[]{Float.parseFloat(parts[0]), Float.parseFloat(parts[1])});
+			verts.add(new float[]{
+							Float.parseFloat(parts[0]),
+							Float.parseFloat(parts[1]),
+							Float.parseFloat(parts[2])
+			});
 		}
 		Matrix[] result = new Matrix[verts.size()];
 
@@ -41,12 +36,14 @@ public class Shape {
 				biggestNum = vert[0];
 			if (vert[1] > biggestNum)
 				biggestNum = vert[1];
+			if (vert[2] > biggestNum)
+				biggestNum = vert[2];
 		}
 		biggestNum = biggestNum * 2;
 
 		for (int i=0; i< verts.size();i++) {
-			verts.set(i, new float[]{verts.get(i)[0]/biggestNum, verts.get(i)[1]/biggestNum});
-			result[i] = new Matrix(verts.get(i)[0], verts.get(i)[1]);
+			verts.set(i, new float[]{verts.get(i)[0]/biggestNum, verts.get(i)[1]/biggestNum, verts.get(i)[2]/biggestNum});
+			result[i] = new Matrix(verts.get(i)[0], verts.get(i)[1], verts.get(i)[2]);
 		}
 		return result;
 	}
@@ -63,9 +60,11 @@ public class Shape {
 		for (int i=0; i<vertices.length;i++) {
 			vertices[i].setX(vertices[i].getX()-posX);
 			vertices[i].setY(vertices[i].getY()-posY);
+			vertices[i].setZ(vertices[i].getZ()-posZ);
 			vertices[i] = vertices[i].multiplicationBy(floatArray);
 			vertices[i].setX(vertices[i].getX()+posX);
 			vertices[i].setY(vertices[i].getY()+posY);
+			vertices[i].setZ(vertices[i].getZ()+posZ);
 		}
 		//transformationMatrix.
 	}
@@ -80,20 +79,24 @@ public class Shape {
 		for (int i=0; i<vertices.length;i++) {
 			vertices[i].setX(vertices[i].getX()-posX);
 			vertices[i].setY(vertices[i].getY()-posY);
+			vertices[i].setZ(vertices[i].getZ()-posZ);
 			vertices[i] = vertices[i].rotateMatrix(degrees);
 			vertices[i].setX(vertices[i].getX()+posX);
 			vertices[i].setY(vertices[i].getY()+posY);
+			vertices[i].setZ(vertices[i].getZ()+posZ);
 		}
 	}
 	public void rotate() {
 		rotate(10);
 	}
 
-	public void move(float x, float y) {
+	public void move(float x, float y, float z) {
 		posX += x;
 		posY += y;
+		posZ += z;
+
 		for (int i=0; i<vertices.length;i++) {
-			vertices[i] = vertices[i].moveBy(x,y);
+			vertices[i] = vertices[i].moveBy(x,y,z);
 		}
 	}
 }
