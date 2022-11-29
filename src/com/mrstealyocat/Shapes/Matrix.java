@@ -150,28 +150,32 @@ public class Matrix {
 		return this.multiplicationBy(scalarMatrix);
 	}
 	//TODO MAKE THIS WORK IN 3D
-	public Matrix rotateMatrix(double degrees) {
+	public Matrix rotateMatrixX(double degrees) {
 		float pi180 = (float)(PI/180);
-
 		Matrix rotationX = new Matrix(new float[]{
 						1f, 0f, 0f, 0f,
 						0f, (float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
 						0f, (float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f,
 						0f, 0f, 0f, 1f});
+		return rotationX.multiplicationBy(this);
+	}
+	public Matrix rotateMatrixY(double degrees) {
+		float pi180 = (float)(PI/180);
 		Matrix rotationY = new Matrix(new float[]{
 						(float) cos(degrees*pi180), 0f, (float) sin(degrees*pi180), 0f,
 						0f, 1f, 0f, 0f,
 						(float) (-1*sin(degrees*pi180)), 0f, (float) cos(degrees*pi180), 0f,
 						0f, 0f, 0f, 1f});
+		return rotationY.multiplicationBy(this);
+	}
+	public Matrix rotateMatrixZ(double degrees) {
+		float pi180 = (float)(PI/180);
 		Matrix rotationZ = new Matrix(new float[]{
 						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f, 0f,
 						(float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f, 0f,
 						0f, 0f, 1f, 0f,
 						0f, 0f, 0f, 1f});
-		return rotationZ.multiplicationBy(rotationY.multiplicationBy(rotationX.multiplicationBy(this)));
-
-
-		//return new Matrix(rotation1).multiplicationBy(this);
+		return rotationZ.multiplicationBy(this);
 	}
 	public static float round(float d, int decimalPlace) {
 		return BigDecimal.valueOf(d).setScale(decimalPlace, RoundingMode.HALF_UP).floatValue();

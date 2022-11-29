@@ -28,9 +28,9 @@ public class KeyListener {
 		if (key == GLFW_KEY_MINUS && action == GLFW_PRESS) {
 			shape.transform(new float[]{1f,1f,1f,0.9f});
 		}
-		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-			shape.rotate();
-		}
+//		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+//			shape.rotate();
+//		}
 		if (action == GLFW_PRESS) {
 			get().keyPressed[key] = true;
 		} else if (action == GLFW_RELEASE) {
@@ -39,9 +39,11 @@ public class KeyListener {
 
 		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A) {
 			shape.move(-0.1f, 0f, 0f);
+			//shape.rotateZ(-10f);
 		}
 		if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) {
 			shape.move(0.1f, 0f, 0f);
+			//shape.rotateZ(10f);
 		}
 		if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S) {
 			shape.move(0f, -0.1f, 0f);

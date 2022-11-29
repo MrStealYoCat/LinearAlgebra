@@ -74,21 +74,45 @@ public class Shape {
 			vector.multiplicationBy(matrix).getMatrixArray();
 		}
 	}
-	public void rotate(float degrees) {
+	public void rotateX(float degrees) {
 		Matrix[] verts = vertices;
 		for (int i=0; i<vertices.length;i++) {
 			vertices[i].setX(vertices[i].getX()-posX);
 			vertices[i].setY(vertices[i].getY()-posY);
 			vertices[i].setZ(vertices[i].getZ()-posZ);
-			vertices[i] = vertices[i].rotateMatrix(degrees);
+			vertices[i] = vertices[i].rotateMatrixX(degrees);
 			vertices[i].setX(vertices[i].getX()+posX);
 			vertices[i].setY(vertices[i].getY()+posY);
 			vertices[i].setZ(vertices[i].getZ()+posZ);
 		}
 	}
-	public void rotate() {
-		rotate(10);
+	public void rotateY(float degrees) {
+		Matrix[] verts = vertices;
+		for (int i=0; i<vertices.length;i++) {
+			vertices[i].setX(vertices[i].getX()-posX);
+			vertices[i].setY(vertices[i].getY()-posY);
+			vertices[i].setZ(vertices[i].getZ()-posZ);
+			vertices[i] = vertices[i].rotateMatrixY(degrees);
+			vertices[i].setX(vertices[i].getX()+posX);
+			vertices[i].setY(vertices[i].getY()+posY);
+			vertices[i].setZ(vertices[i].getZ()+posZ);
+		}
 	}
+	public void rotateZ(float degrees) {
+		Matrix[] verts = vertices;
+		for (int i=0; i<vertices.length;i++) {
+			vertices[i].setX(vertices[i].getX()-posX);
+			vertices[i].setY(vertices[i].getY()-posY);
+			vertices[i].setZ(vertices[i].getZ()-posZ);
+			vertices[i] = vertices[i].rotateMatrixZ(degrees);
+			vertices[i].setX(vertices[i].getX()+posX);
+			vertices[i].setY(vertices[i].getY()+posY);
+			vertices[i].setZ(vertices[i].getZ()+posZ);
+		}
+	}
+//	public void rotate() {
+//		rotate(10);
+//	}
 
 	public void move(float x, float y, float z) {
 		posX += x;

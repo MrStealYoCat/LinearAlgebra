@@ -36,8 +36,10 @@ public class MouseListener {
 		get().xPos = xPos;
 		get().yPos = yPos;
 		if (MouseListener.getDX() != 0) {
-			shape.rotate(getDX()/2);
-			//System.out.println(getDX()/2);
+			shape.rotateY(getDX()/2);
+		}
+		if (MouseListener.getDY() != 0) {
+			shape.rotateX(getDY()/2);
 		}
 		get().isDragging = isPressed();
 	}
