@@ -36,6 +36,19 @@ public class KeyListener {
 		} else if (action == GLFW_RELEASE) {
 			get().keyPressed[key] = false;
 		}
+
+		if (key == GLFW_KEY_LEFT || key == GLFW_KEY_A) {
+			shape.move(-0.1f, 0f);
+		}
+		if (key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) {
+			shape.move(0.1f, 0f);
+		}
+		if (key == GLFW_KEY_DOWN || key == GLFW_KEY_S) {
+			shape.move(0f, -0.1f);
+		}
+		if (key == GLFW_KEY_UP || key == GLFW_KEY_W) {
+			shape.move(0f, 0.1f);
+		}
 	}
 
 	public static boolean isKeyPressed(int keyCode) {

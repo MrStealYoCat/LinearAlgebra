@@ -127,6 +127,13 @@ public class Matrix {
 		return new Matrix(array2D);
 	}
 
+	public Matrix moveBy(float x, float y) {
+		float[][] fa = getMatrixArray();
+		fa[0][2] += x;
+		fa[1][2] += y;
+		return new Matrix(fa);
+	}
+
 	public Matrix translateToOrigin() {
 		float[][] translationMatrix = matrixArray;
 		translationMatrix[0][2] *= -1;
@@ -158,6 +165,12 @@ public class Matrix {
 	}
 	public float getY() {
 		return matrixArray[1][2];
+	}
+	public void setX(float x) {
+		matrixArray[0][2] = x;
+	}
+	public void setY(float y) {
+		matrixArray[1][2] = y;
 	}
 
 	/*
