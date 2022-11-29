@@ -149,7 +149,7 @@ public class Matrix {
 						0f, 0f, 0f, 1f});
 		return this.multiplicationBy(scalarMatrix);
 	}
-	//TODO MAKE THIS WORK IN 3D
+
 	public Matrix rotateMatrixX(double degrees) {
 		float pi180 = (float)(PI/180);
 		Matrix rotationX = new Matrix(new float[]{
