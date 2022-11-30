@@ -1,9 +1,10 @@
 package com.mrstealyocat.display;
 
 import com.mrstealyocat.Shapes.Matrix;
-import com.mrstealyocat.Shapes.Shape;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.stb.STBImageResize.*;
 
 
 public class Graphics {
@@ -43,10 +44,10 @@ public class Graphics {
 		}
 	}
 
-	public static void drawMatrixArray(Matrix[] vertices) {
+	public static void drawMatrixArray(Matrix[] vertices, int[] color) {
 		glLineWidth(8.0f);
 		glBegin(GL_LINES);
-		glColor3f((float)1.0,(float)0.0,(float)0.0);
+		glColor3f(color[0],color[1],color[2]);
 //		for (Matrix vertex:vertices) {
 //			glVertex2f(vertex.getX(), vertex.getY());
 //		}
@@ -56,6 +57,17 @@ public class Graphics {
 			glVertex3f(vertices[i].getX(), vertices[i].getY(), vertices[i].getZ());
 			glVertex3f(vertices[i+1].getX(), vertices[i+1].getY(), vertices[i+1].getZ());
 		}
+		glEnd();
+	}
+	public static void drawPicture(Matrix[] vertices) {
+		glBegin(GL_QUADS);
+		for (int i=0; i<4; i++) {
+			glVertex3f(vertices[i].getX(), vertices[i].getY(), vertices[i].getZ());
+		}
+		glTexCoord2f(0,1);
+		glTexCoord2f(1,1);
+		glTexCoord2f(1,0);
+		glTexCoord2f(0,0);
 		glEnd();
 	}
 

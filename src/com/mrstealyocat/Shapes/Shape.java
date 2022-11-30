@@ -3,23 +3,33 @@ package com.mrstealyocat.Shapes;
 import com.mrstealyocat.TextIO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static java.lang.Math.abs;
 
 public class Shape {
 
 	private Matrix[] vertices;
+	private String color;
+	private int[] rgba;
 	float posX = 0f;
 	float posY = 0f;
 	float posZ = 0f;
 
 	public Shape() {
-		this.vertices = fileInput("src/com/mrstealyocat/Shapes/vertices.txt");
+		//fileInput("src/com/mrstealyocat/Shapes/vertices.txt");
+	}
+	public Shape(String fileName) {
+		fileInput(fileName);
 	}
 
-	public Matrix[] fileInput(String filename) {
+	public void fileInput(String filename) {
 		TextIO.readFile(filename);
 		List<float[]> verts = new ArrayList<>();
 		String[] parts;
+		this.rgba = Arrays.stream(TextIO.getln().split(" ")).mapToInt(Integer::parseInt).toArray();
+		System.out.printf("R: %d, G: %d, B: %d\n", rgba[0], rgba[1], rgba[2]);
 		while (!TextIO.eof()) {
 			parts = TextIO.getln().split(" ");
 			verts.add(new float[]{
@@ -32,20 +42,24 @@ public class Shape {
 
 		float biggestNum = 0f;
 		for (float[] vert : verts) {
-			if (vert[0] > biggestNum)
-				biggestNum = vert[0];
-			if (vert[1] > biggestNum)
-				biggestNum = vert[1];
-			if (vert[2] > biggestNum)
-				biggestNum = vert[2];
+			if (abs(vert[0]) > biggestNum)
+				biggestNum = abs(vert[0]);
+			if (abs(vert[1]) > biggestNum)
+				biggestNum = abs(vert[1]);
+			if (abs(vert[2]) > biggestNum)
+				biggestNum = abs(vert[2]);
 		}
-		biggestNum = biggestNum * 2;
+		if (!(biggestNum <= 1)) {
+			biggestNum = biggestNum * 2;
+		} else {
+			biggestNum = 1;
+		}
 
 		for (int i=0; i< verts.size();i++) {
 			verts.set(i, new float[]{verts.get(i)[0]/biggestNum, verts.get(i)[1]/biggestNum, verts.get(i)[2]/biggestNum});
 			result[i] = new Matrix(verts.get(i)[0], verts.get(i)[1], verts.get(i)[2]);
 		}
-		return result;
+		this.vertices = result;
 	}
 
 	public Matrix[] getVertices() {
@@ -122,5 +136,13 @@ public class Shape {
 		for (int i=0; i<vertices.length;i++) {
 			vertices[i] = vertices[i].moveBy(x,y,z);
 		}
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int[] getRgba() {
+		return rgba;
 	}
 }

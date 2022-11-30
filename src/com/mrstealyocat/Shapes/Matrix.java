@@ -9,9 +9,17 @@ public class Matrix {
 	private float[][] matrixArray;
 	private final int size;
 
-	public Matrix() {
-		this.matrixArray = new float[][] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
-		this.size = 4;
+	public Matrix(int size) {
+		if (size == 2) {
+			this.matrixArray = new float[][] {{1,0},{0,1}};
+		} else if (size == 3) {
+			this.matrixArray = new float[][] {{1,0,0},{0,1,0},{0,0,1}};
+		} else if (size == 4) {
+			this.matrixArray = new float[][]{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+		} else {
+			throw new RuntimeException("Specified Matrix size is not 2, 3, or 4... Come on man!", new IllegalArgumentException());
+		}
+		this.size = size;
 	}
 	public Matrix(float x, float y, float z) {
 		float[] fa = new float[]{
@@ -150,6 +158,14 @@ public class Matrix {
 		return this.multiplicationBy(scalarMatrix);
 	}
 
+	public Matrix rotateMatrix2D(double degrees) {
+		float pi180 = (float)(PI/180);
+		Matrix rotation = new Matrix(new float[]{
+						(float) cos(degrees*pi180), (float) (-1*sin(degrees*pi180)), 0f,
+						(float) sin(degrees*pi180), (float) cos(degrees*pi180), 0f,
+						0f, 0f, 1f});
+		return rotation.multiplicationBy(this);
+	}
 	public Matrix rotateMatrixX(double degrees) {
 		float pi180 = (float)(PI/180);
 		Matrix rotationX = new Matrix(new float[]{
@@ -191,10 +207,18 @@ public class Matrix {
 		return matrixArray[2][3];
 	}
 	public void setX(float x) {
-		matrixArray[0][3] = x;
+		if (size == 3) {
+			matrixArray[0][2] = x;
+		} else if (size == 4) {
+			matrixArray[0][3] = x;
+		}
 	}
 	public void setY(float y) {
-		matrixArray[1][3] = y;
+		if (size == 3) {
+			matrixArray[1][2] = y;
+		} else if (size == 4) {
+			matrixArray[1][3] = y;
+		}
 	}
 	public void setZ(float z) {
 		matrixArray[2][3] = z;

@@ -1,5 +1,6 @@
 package com.mrstealyocat;
 
+import com.mrstealyocat.Shapes.Matrix;
 import com.mrstealyocat.controlListeners.KeyListener;
 import com.mrstealyocat.controlListeners.MouseListener;
 import com.mrstealyocat.display.Graphics;
@@ -17,16 +18,22 @@ import static org.lwjgl.opengl.GL11.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Shape shape = new Shape();
-		KeyListener.setPlayer(shape);
-		MouseListener.setPlayer(shape);
+//		Matrix test = new Matrix(3);
+//		test.setX(0.2f);
+//		test.setY(0.1f);
+//		System.out.println(test);
+//		test = test.rotateMatrix2D(90);
+//		System.out.println(test);
+		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/horse.txt"), new Shape("src/com/mrstealyocat/Shapes/cube.txt")};
+		KeyListener.setPlayer(shapes);
+		MouseListener.setPlayer(shapes);
 		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
-		loop(window, shape);
+		loop(window, shapes);
 		cleanup(window);
 	}
 
 	/* Game Loop Function */
-	public static void loop(Window window, Shape shape) {
+	public static void loop(Window window, Shape[] shapes) {
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
@@ -52,7 +59,9 @@ public class Main {
 
 			//Do Stuff Here
 			Graphics.drawGraph();
-			Graphics.drawMatrixArray(shape.getVertices());
+			for (Shape shape : shapes) {
+				Graphics.drawMatrixArray(shape.getVertices(), shape.getRgba());
+			}
 
 			endMouseFrame();
 			glFlush(); // render now

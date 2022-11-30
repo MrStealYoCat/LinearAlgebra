@@ -14,13 +14,13 @@ public class MouseListener {
 	private double lastY;
 	private final boolean[] mouseButtonPressed = new boolean[GLFW_MOUSE_BUTTON_LAST+1];
 	private boolean isDragging;
-	private static Shape shape;
+	private static Shape[] shapes;
 
 	private MouseListener() {
 
 	}
-	public static void setPlayer(Shape shape) {
-		MouseListener.shape = shape;
+	public static void setPlayer(Shape[] shapes) {
+		MouseListener.shapes = shapes;
 	}
 
 	public static MouseListener get() {
@@ -36,10 +36,14 @@ public class MouseListener {
 		get().xPos = xPos;
 		get().yPos = yPos;
 		if (MouseListener.getDX() != 0) {
-			shape.rotateY(getDX()/2);
+			for (Shape shape : shapes) {
+				shape.rotateY(getDX() / 2);
+			}
 		}
 		if (MouseListener.getDY() != 0) {
-			shape.rotateX(getDY()/2);
+			for (Shape shape : shapes) {
+				shape.rotateX(getDY() / 2);
+			}
 		}
 		get().isDragging = isPressed();
 	}
