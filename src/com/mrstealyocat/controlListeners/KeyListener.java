@@ -32,9 +32,11 @@ public class KeyListener {
 				shape.transform(new float[]{1f, 1f, 1f, 0.9f});
 			}
 		}
-//		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-//			shape.rotate();
-//		}
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+			for (Shape shape : shapes) {
+				shape.rotateZ(45);
+			}
+		}
 		if (action == GLFW_PRESS) {
 			get().keyPressed[key] = true;
 		} else if (action == GLFW_RELEASE) {

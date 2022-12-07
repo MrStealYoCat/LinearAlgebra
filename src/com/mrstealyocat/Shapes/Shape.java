@@ -29,7 +29,7 @@ public class Shape {
 		List<float[]> verts = new ArrayList<>();
 		String[] parts;
 		this.rgba = Arrays.stream(TextIO.getln().split(" ")).mapToInt(Integer::parseInt).toArray();
-		System.out.printf("R: %d, G: %d, B: %d\n", rgba[0], rgba[1], rgba[2]);
+		//System.out.printf("R: %d, G: %d, B: %d\n", rgba[0], rgba[1], rgba[2]);
 		while (!TextIO.eof()) {
 			parts = TextIO.getln().split(" ");
 			verts.add(new float[]{

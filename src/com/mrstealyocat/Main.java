@@ -18,18 +18,31 @@ import static org.lwjgl.opengl.GL11.*;
 public class Main {
 
 	public static void main(String[] args) {
-//		Matrix test = new Matrix(3);
-//		test.setX(0.2f);
-//		test.setY(0.1f);
-//		System.out.println(test);
-//		test = test.rotateMatrix2D(90);
-//		System.out.println(test);
-		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/horse.txt"), new Shape("src/com/mrstealyocat/Shapes/cube.txt")};
-		KeyListener.setPlayer(shapes);
-		MouseListener.setPlayer(shapes);
-		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
-		loop(window, shapes);
-		cleanup(window);
+		//long time = System.currentTimeMillis();
+//		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/line.txt")};
+//		shapes[0].rotateZ(45);
+//		shapes[0].rotateZ(45);
+		//System.out.println(System.currentTimeMillis() - time);
+		Matrix test = new Matrix(new float[] {
+						0.5f, 0f, 0f, -0.5f,
+						0f, 0.5f, 0f, -0.5f,
+						0f, 0f, 0.5f, -0.5f,
+						0f, 0f, 0f, 0f
+		});
+		System.out.println(test);
+		test = test.rotateMatrixX(180);
+		test = test.rotateMatrixY(90);
+		//System.out.println(test);
+		//test = test.rotateMatrixZ(0);
+		//System.out.println(test);
+		System.out.println(test);
+//		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/horse.txt"), new Shape("src/com/mrstealyocat/Shapes/cube.txt")};
+//		//Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/line.txt")};
+//		KeyListener.setPlayer(shapes);
+//		MouseListener.setPlayer(shapes);
+//		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
+//		loop(window, shapes);
+//		cleanup(window);
 	}
 
 	/* Game Loop Function */

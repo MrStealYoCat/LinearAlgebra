@@ -115,6 +115,7 @@ public class Matrix {
 		return new Matrix(array2D);
 	}
 	public Matrix multiplicationBy(Matrix matrix) {
+		long time = System.nanoTime();
 		if (matrix.getSize() != this.size) {
 			throw new RuntimeException(String.format(
 							"Invalid matrix size! Matrix must be %dx%d. Take a Linear Algebra class already.", size, size),
@@ -132,6 +133,7 @@ public class Matrix {
 				array2D[i][j] = placeholder;
 			}
 		}
+		System.out.println(System.nanoTime() - time);
 		return new Matrix(array2D);
 	}
 
