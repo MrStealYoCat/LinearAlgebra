@@ -23,26 +23,26 @@ public class Main {
 //		shapes[0].rotateZ(45);
 //		shapes[0].rotateZ(45);
 		//System.out.println(System.currentTimeMillis() - time);
-		Matrix test = new Matrix(new float[] {
-						0.5f, 0f, 0f, -0.5f,
-						0f, 0.5f, 0f, -0.5f,
-						0f, 0f, 0.5f, -0.5f,
-						0f, 0f, 0f, 0f
-		});
-		System.out.println(test);
-		test = test.rotateMatrixX(180);
-		test = test.rotateMatrixY(90);
+//		Matrix test = new Matrix(new float[] {
+//						0.5f, 0f, 0f, -0.5f,
+//						0f, 0.5f, 0f, -0.5f,
+//						0f, 0f, 0.5f, -0.5f,
+//						0f, 0f, 0f, 0f
+//		});
+//		System.out.println(test);
+//		test = test.rotateMatrixX(180);
+//		test = test.rotateMatrixY(90);
 		//System.out.println(test);
 		//test = test.rotateMatrixZ(0);
 		//System.out.println(test);
-		System.out.println(test);
-//		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/horse.txt"), new Shape("src/com/mrstealyocat/Shapes/cube.txt")};
-//		//Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/line.txt")};
-//		KeyListener.setPlayer(shapes);
-//		MouseListener.setPlayer(shapes);
-//		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
-//		loop(window, shapes);
-//		cleanup(window);
+//		System.out.println(test);
+		Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/horse.txt"), new Shape("src/com/mrstealyocat/Shapes/cube.txt")};
+		//Shape[] shapes = {new Shape("src/com/mrstealyocat/Shapes/line.txt")};
+		KeyListener.setPlayer(shapes);
+		MouseListener.setPlayer(shapes);
+		Window window = new Window("Linear Algebra - Matrices and Computer Graphics", 1000, 1000);
+		loop(window, shapes);
+		cleanup(window);
 	}
 
 	/* Game Loop Function */
@@ -73,6 +73,9 @@ public class Main {
 			//Do Stuff Here
 			Graphics.drawGraph();
 			for (Shape shape : shapes) {
+//				shape.rotateX(0.5F);
+//				shape.rotateY(-0.5F);
+//				shape.rotateZ(0.5F);
 				Graphics.drawMatrixArray(shape.getVertices(), shape.getRgba());
 			}
 
